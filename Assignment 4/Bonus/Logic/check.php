@@ -5,10 +5,10 @@ $subjects = [];
 function check(&$array,$degree, $seq){
 
     if ($degree >= 50) {
-        $array[$seq] =
+        $array[] =
             ['Name' => "subject_" . $seq+1, 'Degree' => $degree, 'Status' => "Successful"];
     } else {
-        $array[$seq] =
+        $array[] =
             ['Name' => "subject_" . $seq+1, 'Degree' => $degree, 'Status' => "Failed"];
     }
 };

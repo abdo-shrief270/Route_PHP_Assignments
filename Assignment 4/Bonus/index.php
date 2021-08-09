@@ -46,9 +46,7 @@
     </center>
 
     <?php
-
     include "Logic/check.php";
-
     if (isset($_POST["submit"])) {
 
         for ($i = 0; $i < 5; $i++) {
@@ -80,10 +78,7 @@
         echo '</tbody>
            </table>
            </center>';
-    }
-
-
-    ?>
+    }?>
 
 </body>
 
