@@ -48,11 +48,9 @@
     <?php
     include "Logic/check.php";
     if (isset($_POST["submit"])) {
-
         for ($i = 0; $i < 5; $i++) {
             check($subjects, $_POST["subject_" . ($i + 1)], $i);
         }
-
         echo '<center>
         <table class="table table-striped border mt-5 w-50">
             <thead>
