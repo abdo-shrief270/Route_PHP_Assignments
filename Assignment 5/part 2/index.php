@@ -1,66 +1,101 @@
-<div style="padding: 20px 0 30px 0;width:50%;float:left">
+<?php
+include "../Assests/navbar.blade.php";
+include "./Logic/check.php";
+$users = [];
+?>
 
-    <center>
-        <h1 style="color:red">Part 1</h1>
-    </center>
-    <form method="post" action="">
-        <center><input required type="text" name="email" placeholder="Email" style="padding-top: 10px; padding-bottom:10px; padding-right: 5px; padding-left:5px; margin-top: 15px; "><br></center>
-        <center><input required type="password" name="password" placeholder="Password" style="padding-top: 10px; padding-bottom:10px; padding-right: 5px; padding-left:5px; margin-top: 15px; "><br></center>
-        <center><input required type="password" name="passwordConfirm" placeholder="Password Confirm" style="padding-top: 10px; padding-bottom:10px; padding-right: 5px; padding-left:5px; margin-top: 15px; "><br></center>
 
-        <center><button style="margin-top:15px; color:#fff ; background-color:#09c ;border:unset; padding :10px 15px ; border-radius:10%;cursor:pointer;" name="submit">Check</button></center>
 
+<div class="container mt-5 pt-5 w-50 m-auto">
+
+    <form class="mt-5 mb-3" method="post" action="">
+        <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input required type="text" class="form-control ml-3" name="email" placeholder="Email Address" id="exampleInputEmail1" aria-describedby="emailHelp">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input required type="password" class="form-control ml-3" id="exampleInputPassword1" name="password" placeholder="Enter Password">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword2">Password</label>
+            <input required type="password" class="form-control ml-3" id="exampleInputPassword2" name="passwordConfirm" placeholder="Re-enter Password">
+        </div>
+        <button type="submit" name="submit" class="btn btn-primary m-auto d-block">Submit</button>
     </form>
 
-
-
-
     <?php
-    $click = false;
     if (isset($_POST['submit'])) {
-        $click = true;
-        $email = $_POST['email'];
-        $password = $_POST['password'];
-        $passwordConfirm = $_POST['passwordConfirm'];
 
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $error = "The email format is't correct !";
-        } elseif (strlen($password) < 8) {
-            $error = "Password should be more than 8 chars !";
-        } elseif ($password !== $passwordConfirm) {
-            $error = "Check password and password confirm fields !";
+        $newUser = new user();
+        $newUser->email = $_POST['email'];
+        $newUser->password = $_POST['password'];
+        $newUser->passwordConfirm = $_POST['passwordConfirm'];
+        $newUser->addUser();
+
+        if (is_string($newUser->addUser())) {
+    ?>
+            <div class="alert alert-danger my-3">
+
+                <?php echo $newUser->addUser(); ?>
+            </div>
+            <?php
         } else {
-            $right = true;
+            $exist = false;
+            foreach ($users as $_user) {
+                if ($_user[0] == $user->email) {
+                    $exist = true;
+                }
+            }
+            if ($exist) {
+            ?>
+                <div class="alert alert-danger my-3">
+
+                    This email is not Available !
+                </div>
+            <?php
+            } else {
+            ?>
+                <div class="alert alert-success my-3">
+                    User added successfully
+
+                </div>
+    <?php
+                $users[] = $newUser->addUser();
+            }
         }
     }
     ?>
 
-    <center <?php if (!$click) {
-                echo 'style="display:none"';
-            } elseif (!isset($error)) {
-                echo 'style="color:green;margin:30px 0 ; "';
-            } ?><?php if (isset($error)) {
-                    echo 'style="margin:20px 0 ; color:red;"';
-                } ?>><?php if (!isset($error)) {
-                            echo "All is right :)";
-                        } ?><?php if (isset($error)) {
-                                echo $error;
-                            } ?></center>
-    <center>
+    <table class="table table-striped border">
+        <thead>
+            <tr>
+                <th scope="col">id</th>
+                <th scope="col">Email</th>
+                <th scope="col">Password</th>
 
-        <h2 <?php if (!isset($right)) {
-                echo 'style="display:none;"';
-            } else {
-                echo 'style="margin : 30px 0 0 10px"';
-            } ?>>Email is : <?php if (!isset($error)) {
-                                echo $email;
-                            } ?></h2>
-        <h3 <?php if (!isset($right)) {
-                echo 'style="display:none;"';
-            } else {
-                echo 'style="margin : 10px 0 0 10px"';
-            } ?>>Password is : <?php if (!isset($error)) {
-                                    echo $password;
-                                } ?></h3>
-    </center>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            foreach ($users as $key => $__user) {
+            ?>
+                <tr>
+                    <th scope="row"><?php echo $key + 1 ?></th>
+                    <td><?php echo $__user[0] ?></td>
+                    <td><?php echo $__user[1] ?></td>
+
+                </tr><?php
+                    }
+                        ?>
+        </tbody>
+    </table>
 </div>
+<pre>
+
+<?php
+print_r($users);?>
+    </pre>
+    <php?
+include "../Assests/footer.blade.php";
+?>
