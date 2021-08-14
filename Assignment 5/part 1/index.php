@@ -1,5 +1,5 @@
 <?php
-include "../Assests/navbar.blade.php";
+include "Assests/navbar.blade.php";
 ?>
 
 <div class="container pt-5">
@@ -22,5 +22,5 @@ include "../Assests/navbar.blade.php";
 
 
 <?php
-include "../Assests/footer.blade.php";
+include "Assests/footer.blade.php";
 ?>

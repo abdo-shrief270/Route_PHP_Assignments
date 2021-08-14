@@ -1,5 +1,5 @@
 <?php
-include "../../Assests/navbar.blade.php";
+include "../Assests/navbar.blade.php";
 
 if (isset($_POST['submit'])) {
     $email = $_POST['email'];

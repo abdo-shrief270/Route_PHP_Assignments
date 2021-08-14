@@ -1,7 +1,7 @@
 <?php
-include "../Assests/navbar.blade.php";
+include "Assests/navbar.blade.php";
 include "./Logic/check.php";
-$users = [];
+$users = [["ahmed@gmail.com","12345678"],["ahmed10@gmail.com","12385679"]];
 ?>
 
 
@@ -43,7 +43,7 @@ $users = [];
         } else {
             $exist = false;
             foreach ($users as $_user) {
-                if ($_user[0] == $user->email) {
+                if ($_user[0] == $newUser->email) {
                     $exist = true;
                 }
             }
@@ -91,11 +91,9 @@ $users = [];
         </tbody>
     </table>
 </div>
-<pre>
 
 <?php
-print_r($users);?>
-    </pre>
-    <php?
-include "../Assests/footer.blade.php";
+
+
+include "Assests/footer.blade.php";
 ?>

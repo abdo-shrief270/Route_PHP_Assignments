@@ -1,9 +1,9 @@
 <?php
-include "../Assests/navbar.blade.php";
+include "Assests/navbar.blade.php";
 ?>
 
-    <center class="mt-5">
-        <form method="POST" action="">
+    <center class="mt-5 pt-5">
+        <form method="POST" action="Logic/check.php">
             <label for="subject_1">Subject 1</label>
             <input required id="subject_1" min="0" max="100" type="number" name="subject_1" placeholder="Degree">
             <br>
@@ -36,40 +36,12 @@ include "../Assests/navbar.blade.php";
         </form>
     </center>
 
-    <?php
-    include "Logic/check.php";
-    if (isset($_POST["submit"])) {
-        for ($i = 0; $i < 5; $i++) {
-            check($subjects, $_POST["subject_" . ($i + 1)], $i);
-        }
-        echo '<center>
-        <table class="table table-striped border mt-5 w-50">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Degree</th>
-                    <th scope="col">Status</th>
-                </tr>
-            </thead>
-            <tbody>';
-
-        ////////////////////////
-        for ($i = 0; $i < 5; $i++) {
-            echo " <tr>
-            <th scope='row'>" . $i + 1 . "</th>
-            <td>" . $subjects[$i]['Name'] . "</td>
-            <td>" . $subjects[$i]['Degree'] . "</td>
-            <td>" . $subjects[$i]['Status'] . "</td>
-          </tr>";
-        }
-        ////////////////////////
-        echo '</tbody>
-           </table>
-           </center>';
-    }?>
+   
 
 
-<?php
-include "../Assests/footer.blade.php";
-?>
+
+
+
+
+
+
