@@ -1,7 +1,6 @@
 <?php
 session_start();
 include "dbCont.php";
-// include "errors.php";
 
 
 
@@ -14,14 +13,12 @@ class dbCheck
         global $cont;
         $checkEmail = $cont->prepare("SELECT * FROM users WHERE EMAIL=? LIMIT 1");
         $checkEmail->execute([$email]);
-        // var_dump($checkEmail->fetch());
         if ($cond) {
             return $checkEmail->fetch();
         }
         return $checkEmail->fetchAll();
     }
 }
-// dbCheck::checkEmail("abdo@email.com",true);
 
 
 class dbActions
