@@ -2,18 +2,24 @@
 include "functions.php";
 
 
-if (isset($_POST['submitRegister'])) {
+if (isset($_POST['signup'])) {
     $userName = $_POST['userName'];
     $userEmail = $_POST['userEmail'];
     $userPassword = $_POST['userPassword'];
-    $user=new user;
-    if ($user->checkUser( $userEmail, $userPassword,$userName)) {
-        $_SESSION['done'] = "User Has Added :)";
-        header("Location:../index.php");
+    if ($userPassword == $_POST['userRe_password']) {
+
+        $user = new user;
+        if ($user->checkUser( $userName, $userPassword,$userEmail)) {
+            $_SESSION['doneRegister'] = "User Has Added :)";
+            header("Location:../register.php");
+        } else {
+            $_SESSION['errorRegister'] = "Name Is Exists !";
+            header("Location:../register.php");
+        }
     }
     else
     {
-        $_SESSION['error'] = "Email Is Exists !";
-        header("Location:../index.php");
+        $_SESSION['errorRegister'] = "Password must equal Re_password !";
+            header("Location:../register.php");
     }
 }

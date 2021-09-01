@@ -64,15 +64,12 @@ class user
                
                 $_SESSION['done'] = "Hello " . $login['name'] . " :)";
                 header("Location:../index.php");
-            }elseif($login=="Email Not Found")
-            {
-                $_SESSION['error'] = "Email Not Found !";
+            } else {
+                $_SESSION['errorLogin'] = $login;
                 header("Location:../index.php");
-            }else{
-                $_SESSION['error'] = "Password Is Incorrect !";
-                header("Location:../index.php");
-            } 
+            }
+        } else {
+            return dbActions::register($name, $email, $password);
         }
-        return dbActions::register($name, $email, $password);
     }
 }

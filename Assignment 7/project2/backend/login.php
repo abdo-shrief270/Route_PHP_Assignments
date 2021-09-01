@@ -1,9 +1,9 @@
 <?php
 include "functions.php";
 
-if (isset($_POST['submitLogin'])) {
-    $userEmail = $_POST['userEmail'];
-    $userPassword = $_POST['userPassword'];
+if (isset($_POST['signin'])) {
+    $userName = $_POST['your_name'];
+    $userPassword = $_POST['your_pass'];
     $user = new user;
-    $user->checkUser($userEmail, $userPassword);
+    $user->checkUser($userName, $userPassword);
 }
